@@ -1,0 +1,3 @@
+running e2c t05
+Token(TK.NUM 2341 2)
+Token(TK.EOF *EOF* 3)

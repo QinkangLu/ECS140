@@ -1,0 +1,3 @@
+running e2c t06
+mustbe: want TK.ASSIGN, got Token(TK.EOF *EOF* 3)
+can't parse: line 3 missing token (mustbe)

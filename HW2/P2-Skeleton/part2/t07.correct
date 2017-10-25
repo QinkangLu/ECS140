@@ -1,0 +1,3 @@
+running e2c t07
+mustbe: want TK.ASSIGN, got Token(TK.NUM 12 2)
+can't parse: line 2 missing token (mustbe)
