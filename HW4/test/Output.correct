@@ -1,0 +1,329 @@
+
+          BEGIN TESTING
+
+
+                    TEST-All-Len
+
+testing:  (ALL-LENGTH NIL)
+value:    0
+
+testing:  (ALL-LENGTH '(A B C D E F))
+value:    6
+
+testing:  (ALL-LENGTH '((1 2 3) (4 5 6)))
+value:    6
+
+testing:  (ALL-LENGTH '(G NIL H (X Y Z NIL)))
+value:    5
+
+testing:  (ALL-LENGTH '(A (B C) (D (E F))))
+value:    6
+
+testing:  (ALL-LENGTH '(NIL (NIL NIL) (A A (0 (((0))) ((NIL)) (((NIL A)))))))
+value:    5
+
+
+                    TEST-Range
+
+testing:  (RANGE '(5))
+value:    (5 5)
+
+testing:  (RANGE '(5 4 3 2 1))
+value:    (1 5)
+
+testing:  (RANGE '(0 7 8 2 3 -1))
+value:    (-1 8)
+
+testing:  (RANGE '(8 8 8 8 8 8 8 8))
+value:    (8 8)
+
+testing:  (RANGE '(8 8 8 8 8 8 8 9))
+value:    (8 9)
+
+testing:  (RANGE '(6 6 5 4 3 2 1 1))
+value:    (1 6)
+
+
+                    TEST-before
+
+testing:  (BEFORE 'A 'D '(A B C D E F))
+value:    (A B C D)
+
+testing:  (BEFORE 'D 'A '(A B C D E F))
+value:    (D E F)
+
+testing:  (BEFORE 'A 'D '(1 2 3 D A D A))
+value:    (A D)
+
+testing:  (BEFORE 'A 'D '(C A D A B C D))
+value:    (A D)
+
+testing:  (BEFORE 'A 'D 'NIL)
+value:    NIL
+
+testing:  (BEFORE 'A 'B '(1 2 3 A 0 B 4 5 6))
+value:    (A 0 B)
+
+testing:  (BEFORE 'A 'B '(1 2 3 B A B A))
+value:    (A B)
+
+testing:  (BEFORE 'A 'B '(NIL B A C D (2 3)))
+value:    (A C D (2 3))
+
+testing:  (BEFORE 'A 'D '(A))
+value:    (A)
+
+testing:  (BEFORE '(1 2) '(1 2 3) '((1 2) (1 2 3) (1 2) A))
+value:    ((1 2) (1 2 3))
+
+
+                    TEST-split-if
+
+testing:  (SPLIT-IF #'NULL 'NIL)
+value:    (NIL NIL)
+
+testing:  (SPLIT-IF #'LISTP '(1 2 3 NIL (A B) X (HI BYE) Z D))
+value:    ((1 2 3 X Z D) (NIL (A B) (HI BYE)))
+
+testing:  (SPLIT-IF #'ATOM '(A B C D E F NIL H I J NIL L NIL NIL))
+value:    (NIL (A B C D E F NIL H I J NIL L NIL NIL))
+
+testing:  
+(SPLIT-IF
+ #'(LAMBDA (X) (DECLARE (SOURCE ((X) (NOT (= 0 (MOD X 3))))))
+    (NOT (= 0 (MOD X 3))))
+ '(0 22 1 4 9 5 3 6 7 11 33 12 99))
+value:    ((0 9 3 6 33 12 99) (22 1 4 5 7 11))
+
+testing:  
+(SPLIT-IF #'(LAMBDA (X) (DECLARE (SOURCE ((X) (> X 80)))) (> X 80))
+ '(55 66 22 100 99 89 78 83 72 69))
+value:    ((55 66 22 78 72 69) (100 99 89 83))
+
+testing:  
+(SPLIT-IF
+ #'(LAMBDA (X) (DECLARE (SOURCE ((X) (> (CADR X) 70)))) (> (CADR X) 70))
+ '((BOB 70) (LEE 60) (SALLY 88) (MIKE 90) (LISA 100) (DAN 99)))
+value:    (((BOB 70) (LEE 60)) ((SALLY 88) (MIKE 90) (LISA 100) (DAN 99)))
+
+testing:  
+(SPLIT-IF
+ #'(LAMBDA (X) (DECLARE (SOURCE ((X) (EQUAL 'YELLOW (CAR X)))))
+    (EQUAL 'YELLOW (CAR X)))
+ '((YELLOW SARA JUN) (BLUE DAVE FRES) (GREEN CHRIS SEN) (BLACK LARS SEN)
+   (RED MELISSA SOP) (YELLOW KEN SEN) (YELLOW HOLLY SEN)))
+value:    
+(((BLUE DAVE FRES) (GREEN CHRIS SEN) (BLACK LARS SEN) (RED MELISSA SOP))
+ ((YELLOW SARA JUN) (YELLOW KEN SEN) (YELLOW HOLLY SEN)))
+
+testing:  
+(SPLIT-IF
+ #'(LAMBDA (X) (DECLARE (SOURCE ((X) (> (LENGTH X) 3)))) (> (LENGTH X) 3))
+ '((1 2 3) (33) (10 6 5 43 2) (0 A B) (HELLO HOW ARE YOU) NIL (A B C)
+   (VANILLA CHOCOLATE STRAWBERRY) (BOO) (X Y Z U V W) (FOO BOO BAR FOO BOO) (E)
+   (I AM DONE)))
+value:    
+(((1 2 3) (33) (0 A B) NIL (A B C) (VANILLA CHOCOLATE STRAWBERRY) (BOO) (E)
+  (I AM DONE))
+ ((10 6 5 43 2) (HELLO HOW ARE YOU) (X Y Z U V W) (FOO BOO BAR FOO BOO)))
+
+
+                    TEST-group
+
+testing:  (GROUP 'NIL 1)
+value:    NIL
+
+testing:  (GROUP '(A (A B) (C D) E F G) 3)
+value:    ((A (A B) (C D)) (E F G))
+
+testing:  (GROUP '(1 2 3 4 5 5 8 9 A (C D) E F G) 8)
+value:    ((1 2 3 4 5 5 8 9) (A (C D) E F G))
+
+testing:  (GROUP '(A B C D E F G H) 1)
+value:    ((A) (B) (C) (D) (E) (F) (G) (H))
+
+testing:  (GROUP '(((F G H))) 3)
+value:    ((((F G H))))
+
+
+                    TEST-mostn
+
+testing:  (MOSTN #'SQR '(1 8 4 8 3 9 8))
+value:    ((9) 81)
+
+testing:  (MOSTN #'EVAL '((+ 1 2) (+ 3 4) (+ 4 3)))
+value:    (((+ 3 4) (+ 4 3)) 7)
+
+testing:  (MOSTN #'EVAL '((SQR 2) (SQR 4) (SQR 3)))
+value:    (((SQR 4)) 16)
+
+
+                    TEST-Match
+
+testing:  (MATCH '(THINK ABOUT THAT) '(THINK THAT ABOUT))
+value:    NIL
+
+testing:  (MATCH '(THINK ABOUT THAT) '(THINK ABOUT THAT))
+value:    T
+
+testing:  (MATCH '(THINK ABOUT THAT) NIL)
+value:    NIL
+
+testing:  (MATCH NIL 'NIL)
+value:    T
+
+testing:  (MATCH NIL '(NIL))
+value:    NIL
+
+testing:  (MATCH '(NIL NIL) '(NIL))
+value:    NIL
+
+testing:  (MATCH '(NIL NIL) '(NIL NIL))
+value:    T
+
+testing:  (MATCH '(A A) '(A))
+value:    NIL
+
+testing:  (MATCH '(A ?) '(A A))
+value:    T
+
+testing:  (MATCH '(A NIL ?) '(A NIL NIL))
+value:    T
+
+testing:  (MATCH '(? ? ? ?) '(WHAT TIME IS IT))
+value:    T
+
+testing:  (MATCH '(? ? ? ? ?) '(WHAT TIME IS IT NOW AH))
+value:    NIL
+
+testing:  (MATCH '(? ? ? ? ?) '(WHAT TIME IS IT))
+value:    NIL
+
+testing:  (MATCH '(? COLOR APPLE) '(COLOR COLOR APPLE NIL))
+value:    NIL
+
+testing:  (MATCH '(THIS TABLE IS ROUND ?) '(THIS TABLE IS ROUND OR))
+value:    T
+
+testing:  (MATCH '(THIS !) '(THIS TABLE IS ROUND))
+value:    T
+
+testing:  (MATCH '(THIS ! IS ROUND) '(THIS TABLE IS ROUND))
+value:    T
+
+testing:  (MATCH '(THIS TABLE !) '(THIS THIS TABLE IS ROUND))
+value:    NIL
+
+testing:  (MATCH '(! TABLE IS ROUND) '(THIS TABLE IS ROUND OR))
+value:    NIL
+
+testing:  (MATCH '(! TABLE IS ROUND) '(THIS TABLE))
+value:    NIL
+
+testing:  (MATCH '(THIS ! ROUND) '(THIS TABLE IS ROUND))
+value:    T
+
+testing:  (MATCH '(IS THAT FINE ?) '(THAT FINE TOO))
+value:    NIL
+
+testing:  (MATCH '(!) '(NO MATTER WHAT))
+value:    T
+
+testing:  (MATCH '(! !) '(NO MATTER WHAT))
+value:    T
+
+testing:  (MATCH '(! ! !) '(NO MATTER WHAT))
+value:    T
+
+testing:  (MATCH '(! ! ! !) '(NO MATTER WHAT))
+value:    NIL
+
+testing:  (MATCH '(! BIG ! ?) '(A YELLOW BIG WOODEN BAG))
+value:    T
+
+testing:  (MATCH '(! BIG ! ?) '(A YELLOW BIG BAG))
+value:    NIL
+
+testing:  (MATCH '(! ! ? ! !) '(HOW ARE YOU TODAY AH))
+value:    T
+
+testing:  (MATCH '(! ! ! ! !) '(HOW ARE YOU TODAY))
+value:    NIL
+
+testing:  (MATCH '(! ? ? FUNNY !) '(IS IT REALLY FUNNY OR WHAT))
+value:    T
+
+testing:  (MATCH '(! ? ? FUNNY !) '(IS IT REALLY FUNNY))
+value:    NIL
+
+testing:  (MATCH '(? ? ! ? A) '(A A A A))
+value:    NIL
+
+testing:  (MATCH '(? ? ! ? A !) '(A A A A A NIL))
+value:    T
+
+testing:  (MATCH '(! B ? B A B A ! ? !) '(B B A B A B A B A B A))
+value:    T
+
+testing:  (MATCH '(! B ? A B A B ! ? !) '(B B A B A B A B A B))
+value:    NIL
+
+
+                    TEST-Match-Var
+
+testing:  (MATCH-VAR '(PLUS (? A) (? B)) '(PLUS 2 3))
+value:    T
+
+testing:  (EVAL 'A)
+value:    2
+
+testing:  (EVAL 'B)
+value:    3
+
+testing:  (MATCH-VAR '((! U) A (? V)) '(B C A D))
+value:    T
+
+testing:  (EVAL 'U)
+value:    (B C)
+
+testing:  (EVAL 'V)
+value:    D
+
+testing:  (MATCH-VAR '((! U) (? V) C (! W)) '(B C A D))
+value:    NIL
+
+testing:  (MATCH-VAR '(A (! U) A (? V) A (! W)) '(A A A A B A A))
+value:    T
+
+testing:  (EVAL 'U)
+value:    (A A)
+
+testing:  (EVAL 'V)
+value:    B
+
+testing:  (EVAL 'W)
+value:    (A)
+
+testing:  
+(MATCH-VAR '(NIL (! U) (! V) (? W) NIL (! Y) A A)
+ '(NIL NIL A NIL NIL A A NIL A A))
+value:    T
+
+testing:  (EVAL 'U)
+value:    (NIL)
+
+testing:  (EVAL 'V)
+value:    (A)
+
+testing:  (EVAL 'W)
+value:    NIL
+
+testing:  (EVAL 'Y)
+value:    (A A NIL)
+
+testing:  (MATCH-VAR '(NIL (! U) (! V) (? W) NIL (! Y) A A) '(NIL A NIL NIL A A NIL A A))
+value:    NIL
+
+
+          DONE TESTING
+
