@@ -1,7 +1,7 @@
 # Common Lisp Programming Practice
 
-## Running
-To compile CLISP code, you have to first install CLISP in your compiler and then simply type "clisp filename.l" to run it
+## Testing
+To compile CLISP code, you have to first install CLISP in your compiler and then simply type "clisp filename.l" to run it. To test all the parts and all the functions at once, you simply have to go to the test folder and run the shell script "./test.sh" to run all of them at once.
 
 ## Part 1: Simple Function Definitions
 The goal of this part of the homework is to familiarize you with the notions of lists, function definitions, and
