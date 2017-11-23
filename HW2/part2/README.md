@@ -1,4 +1,4 @@
-#Part 2: The Parser
+# Part 2: The Parser
 First, rewrite the grammar using syntax graphs. Then, determine the first sets; this should be straightforward because the grammar is simple. Finally, translate the syntax graph into a parser. See the textbook for details.
 
 If an error, e.g., missing “=” in an assignment statement — is encountered in parsing, give an appropriate

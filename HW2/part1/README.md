@@ -1,4 +1,4 @@
-#Part 1: The Scanner
+# Part 1: The Scanner
 A scanner is sometimes called a lexer — since it does lexical analysis — or a tokenizer — since it breaks up its input into tokens. For example, the GetToken procedure described in Louden is a scanner.
 
 You will be provided with a nearly complete scanner. You need to provide a few omitted tokens (in Scan.java and TK.java). This part is simple, but look at the scanner code to see how it works and use the

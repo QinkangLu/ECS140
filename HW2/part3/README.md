@@ -1,4 +1,4 @@
-#Part 3: The Symbol Table
+# Part 3: The Symbol Table
 Up to this point, we have dealt with syntax. Now, we need to enforce the semantic constraints that deals with variables: We must detect undeclared and redeclared variables.
 
 A table of variables in the current scope needs to be maintained. Each time a variable is declared, the table is checked. If the variable is already in the table entries for the current block, then it is being redeclared.
