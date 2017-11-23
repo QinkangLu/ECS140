@@ -1,0 +1,26 @@
+>>=====  Testing Part 2 =====<<
+**** Test add/Get/Set
+Adding Elements...
+0 A 1 B 2 C 3 D 4 E 5 F 6 G 7 H 8 I 9 J 
+**** Test Print
+Printing sequence: s1 of 20 elements:
+[ 0 'A' 1 'B' 2 'C' 3 'D' 4 'E' 5 'F' 6 'G' 7 'H' 8 'I' 9 'J' ]
+**** Test first/rest
+Printing head of s1: 0
+Printing sequence: s2 (rest of s1) of 19 elements:
+[ 'A' 1 'B' 2 'C' 3 'D' 4 'E' 5 'F' 6 'G' 7 'H' 8 'I' 9 'J' ]
+Printing sequence: s1 (after adding at 3 and 0) of 22 elements:
+[ 99 0 'A' 1 99 'B' 2 'C' 3 'D' 4 'E' 5 'F' 6 'G' 7 'H' 8 'I' 9 'J' ]
+Printing sequence: s2 (after adding at 3 and 0 to s1) of 20 elements:
+[ 'A' 1 99 'B' 2 'C' 3 'D' 4 'E' 5 'F' 6 'G' 7 'H' 8 'I' 9 'J' ]
+Printing first of rest:
+99 0 'A' 1 99 'B' 2 'C' 3 'D' 4 'E' 5 'F' 6 'G' 7 'H' 8 'I' 9 'J' 
+**** Test delete
+Printing sequence: Delete(0) - t1 of 21 elements:
+[ 0 'A' 1 99 'B' 2 'C' 3 'D' 4 'E' 5 'F' 6 'G' 7 'H' 8 'I' 9 'J' ]
+Printing sequence: Delete(3) - t1 of 20 elements:
+[ 0 'A' 1 'B' 2 'C' 3 'D' 4 'E' 5 'F' 6 'G' 7 'H' 8 'I' 9 'J' ]
+Printing sequence: Delete(9) - t1 of 19 elements:
+[ 0 'A' 1 'B' 2 'C' 3 'D' 4 5 'F' 6 'G' 7 'H' 8 'I' 9 'J' ]
+Printing sequence: s1 of 19 elements:
+[ 0 'A' 1 'B' 2 'C' 3 'D' 4 5 'F' 6 'G' 7 'H' 8 'I' 9 'J' ]
