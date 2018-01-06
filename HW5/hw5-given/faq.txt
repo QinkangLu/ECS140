@@ -1,0 +1,35 @@
+* Can built-in predicates be used? 
+
+Yes, you may use the built-in predicates. 
+
+* Does the order of output matter? 
+
+Order of output usually does not matter, as long as your results are
+correct. But, as for previous homework assignments, do please match
+the sample output exactly on the given tests to facilitate automated
+grading.
+
+* How to collect all possible solutions? 
+
+The built-in predicates described at the following link: 
+    http://www.gprolog.org/manual/html_node/gprolog033.html
+can become handy. 
+
+* How to format part 3 output? 
+
+(1) Format your output exactly as follows (as a sequence of moves): 
+take(wolf, left, right)
+take(none, right, left)
+...
+ 
+Use 'none' when the farmer doesn't take anything across. 
+ 
+(2) Name your top-level predicate as 'solve', i.e., 
+solve :- ... 
+ 
+So, when the following is queried: 
+| ?- solve.
+the sequence of moves will be given. 
+ 
+(3) One shortest solution suffices (i.e., no useless moves). 
+

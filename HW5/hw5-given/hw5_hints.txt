@@ -1,0 +1,43 @@
+			    Hints for Hw5
+
+Puzzle
+------
+
+You can think of the problem as that of finding a path in a graph: Given
+an initial state (everything on one side of the river bank), the Prolog
+program needs to find a path to the final state (everything on the other
+side of the river). So the problem is that of
+	(i) representing the puzzle in terms of a graph by defining
+	    nodes and arcs/edges of the graph, and
+       (ii) defining a program that will find a path in the above graph.
+
+Let us first look at representing the puzzle as a graph. For our
+problem, nodes are states of the puzzle, indicating the locations of the
+farmer, wolf, goat, and cabbage. Thus, you will need to specify what is
+a node in the graph: it includes all valid states and does not include
+any invalid state (and hence the Prolog program should not include it in
+any searches). You will need to define rules for specifying valid and
+invalid states. An example:
+
+		unsafe(state(A, B, B, C)) :- opposite(A, B).
+
+For edges/arcs you need to define how two nodes are connected. In other
+words, how can the Prolog program go from one valid state to another
+valid state. An example rule could be:
+
+	arc(take(wolf, A, B), state(A, A, C, D), state(B, B, C, D))
+			:- opposite(A, B).
+
+	This specifies that (i) wolf is being moved from one side to
+	another, and (ii) corresponding changes in states.
+
+You will need to define all rules that specify such moves.
+
+Finally you need to define a set of rules for traversing a graph with
+nodes and edges/arcs. Look at your book for graph traversal and plug it
+with what you have defined earlier.
+
+Given that go(A, B) prints out path from node A to node B, you can
+solve the puzzle with:
+
+  go(state(left, left, left, left), state(right, right, right, right)).

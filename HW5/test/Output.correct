@@ -1,0 +1,300 @@
+
+TESTING C_s
+
+testing: fc_course(Course)
+Course = m16a
+
+Course = m21c
+
+Course = m22a
+
+Course = ecs10
+
+Course = ecs15
+
+Course = ecs30
+
+Course = ecs35
+
+Course = ecs40
+
+Course = ecs50
+
+Course = ecs100
+
+Course = ecs110
+
+Course = ecs122a
+
+Course = ecs122b
+
+Course = ecs140a
+
+Course = ecs140b
+
+Course = ecs142
+
+Course = ecs150
+
+Course = ecs151a
+
+Course = ecs151b
+
+Course = ecs152
+
+Course = ecs153
+
+Course = ecs154a
+
+Course = ecs154b
+
+Course = ecs158
+
+Course = ecs160
+
+Course = ecs163
+
+Course = ecs165a
+
+Course = ecs165b
+
+Course = ecs170
+
+Course = ecs172
+
+
+TESTING P_s
+
+testing: prereq_110(Prerequisites)
+Prerequisites = ecs122a
+
+Prerequisites = ecs140a
+
+Prerequisites = ecs154a
+
+Prerequisites = ecs154b
+
+Prerequisites = ecs163
+
+Prerequisites = ecs165a
+
+Prerequisites = ecs172
+
+
+TESTING ECS140AS
+
+testing: ecs140a_students(Students)
+Students = brad
+
+Students = john
+
+Students = nancy
+
+
+TESTING INSTRUCTOR
+
+testing: instructor_names(Instructor)
+Instructor = adam
+
+Instructor = charles
+
+Instructor = cindi
+
+Instructor = davis
+
+Instructor = diane
+
+Instructor = jim
+
+
+TESTING STUDENTS
+
+testing: students(STUDENTS)
+STUDENTS = dan
+
+STUDENTS = john
+
+STUDENTS = ian
+
+STUDENTS = karl
+
+STUDENTS = lam
+
+STUDENTS = nancy
+
+
+TESTING ALL_PREREQ
+
+testing: allprereq(ecs140a,All_Pre)
+All_Pre = [m16a,ecs30,ecs40,ecs110]
+
+testing: allprereq(m16a,All_Pre)
+All_Pre = []
+
+testing: allprereq(ecs110,All_Pre)
+All_Pre = [m16a,ecs30,ecs40]
+
+testing: allprereq(ecs50,All_Pre)
+All_Pre = [m16a,ecs30,ecs40]
+
+
+TESTING ALL_LEN
+
+testing: all_length([],All_Len)
+All_Len = 0
+
+testing: all_length([a,b,c,d],All_Len)
+All_Len = 4
+
+testing: all_length([a,b,[c],d],All_Len)
+All_Len = 4
+
+testing: all_length([a,b,[c,d],e],All_Len)
+All_Len = 5
+
+testing: all_length([[[[[]]]]],All_Len)
+All_Len = 1
+
+testing: all_length([[a,b],[],d],All_Len)
+All_Len = 4
+
+testing: all_length([a,[b,[c,[d,e],f],g],h],All_Len)
+All_Len = 8
+
+testing: all_length([[a,b,[],d],[[]],d],All_Len)
+All_Len = 6
+
+testing: all_length([[a,b,[[[[e,e]]]],d],[[]],d],All_Len)
+All_Len = 7
+
+testing: all_length([[a,b,[[[a],b]],d],[[],[],[[[]]]],d],All_Len)
+All_Len = 9
+
+
+TESTING EQ_A_B
+
+testing: equal_a_b([a,b])
+yes
+
+testing: equal_a_b([a,a,b])
+no
+
+testing: equal_a_b([b,a])
+yes
+
+testing: equal_a_b([a,b])
+yes
+
+testing: equal_a_b([])
+yes
+
+testing: equal_a_b([a,b,a,a,b,c,d,b,f])
+yes
+
+testing: equal_a_b([a,b,a,a,b,c,d,b,f,b])
+no
+
+testing: equal_a_b([aa,bbb,aaa])
+yes
+
+testing: equal_a_b([aa,bbb,aaa,a])
+no
+
+testing: equal_a_b([aa,b,bbb,aaa,a])
+yes
+
+testing: equal_a_b([a,a,a,a,a,a,b,b,b,b,b,b])
+yes
+
+testing: equal_a_b([a,a,a,a,a,a,d,b,b,b,b,b,b,b])
+no
+
+testing: equal_a_b([b,a,b,a,b,a,b,a,b,a,b,a,b,a,b,a])
+yes
+
+testing: equal_a_b([a,b,a,b,a,b,a,b,a,b,a,b,a,b,a,b,a])
+no
+
+
+TESTING SWAP
+
+testing: swap_prefix_suffix([],[],SWAP)
+SWAP = []
+
+testing: swap_prefix_suffix([],[a,b],SWAP)
+SWAP = [a,b]
+
+SWAP = [b,a]
+
+SWAP = [a,b]
+
+testing: swap_prefix_suffix([a],[a,b],SWAP)
+SWAP = [b,a]
+
+testing: swap_prefix_suffix([a],[a],SWAP)
+SWAP = [a]
+
+testing: swap_prefix_suffix([a],[],SWAP)
+testing: swap_prefix_suffix([c,d],[a,b,c,d,e,f],SWAP)
+SWAP = [e,f,c,d,a,b]
+
+testing: swap_prefix_suffix([a,b,c],[a,b,d,e,a,b,c,a,b],SWAP)
+SWAP = [a,b,a,b,c,a,b,d,e]
+
+testing: swap_prefix_suffix(SWAP,[a,b,c,d,e],[b,c,d,e,a])
+SWAP = [a]
+
+SWAP = []
+
+SWAP = [b,c,d,e]
+
+testing: swap_prefix_suffix(SWAP[b,a,b,b,a,a,a])
+SWAP = [a,b,b,a]
+[a,a,a,b,b,a,b]
+
+testing: swap_prefix_suffix(SWAP[c,a,b,c,a,b,c,a,b,c])
+SWAP = [c,a,b,c]
+[a,b,c,c,a,b,c,c,a,b]
+
+
+TESTING palin
+
+testing: palin([a,b,c,d])
+no
+
+testing: palin([a,b,b,a])
+yes
+
+testing: palin([a,b,a])
+yes
+
+testing: palin([a,a,a,a])
+yes
+
+testing: palin([])
+yes
+
+testing: palin([b,a,a,a,a,a,a,a,a,a,a,a,b])
+yes
+
+testing: palin([b,a,b,a,b,a,b,a,b,a,b])
+yes
+
+
+TESTING good
+
+testing: good([0])
+yes
+
+testing: good([0,1,0])
+no
+
+testing: good([1,1,0])
+no
+
+testing: good([1,0,1,0,0])
+yes
+
+testing: good([1,0,1,1,1,1,1,0,1])
+no
+
